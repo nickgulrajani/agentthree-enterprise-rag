@@ -1,0 +1,34 @@
+# Metadata-based access control for enterprise knowledge retrieval.
+# Clearance levels: public < internal < confidential < restricted
+
+clearance_rank:
+  public: 0
+  internal: 1
+  confidential: 2
+  restricted: 3
+
+# Demo principals (interview walkthrough)
+principals:
+  alice_hr:
+    display_name: Alice (HR Analyst)
+    department: hr
+    clearance: confidential
+    roles: [employee, hr_reader]
+
+  bob_eng:
+    display_name: Bob (Engineering)
+    department: engineering
+    clearance: internal
+    roles: [employee]
+
+  eve_contractor:
+    display_name: Eve (External Contractor)
+    department: external
+    clearance: public
+    roles: [contractor]
+
+# Document ACL rules: a chunk is visible if principal meets ALL matching constraints.
+# Docs declare classification + allowed_departments (+ optional roles).
+defaults:
+  deny_by_default: true
+  require_clearance_at_least_doc_classification: true
