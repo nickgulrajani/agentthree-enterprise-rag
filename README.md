@@ -8,6 +8,24 @@ An AI agent answers a policy question using **only authorized documents**, retur
 
 ---
 
+## Implementation status
+
+| Area | Status | Notes |
+|------|--------|-------|
+| Ingest / chunk / hybrid retrieve (vector + BM25 + RRF) | **Implemented (local)** | Deterministic hashing embeddings — no model download |
+| ACL filter (clearance · dept · roles) | **Implemented (local)** | Fail-closed after retrieve |
+| Grounded answers + citations | **Implemented (local)** | Extractive sentences from authorized chunks |
+| Refuse-to-fabricate | **Implemented (local)** | Score + lexical overlap gates |
+| Offline RAG evaluation | **Implemented** | YAML fixtures + `pytest` / `agentthree-rag eval` |
+| Managed vector DB / cloud search | **Not deployed** | Documented analogues only (OpenSearch, Azure AI Search, Vertex) |
+| Hosted LLM grounding | **Not deployed** | Local extractive grounder simulates citation/abstain policy |
+
+**Simulated vs cloud:** Retrieval, ACL, grounding, and eval are fully runnable offline. Enterprise search / IdP / managed embeddings are **documented mappings**, not live cloud services.
+
+Architecture diagram: [docs/architecture.md](docs/architecture.md)
+
+---
+
 ## What you can show in an interview
 
 ```text
@@ -59,6 +77,17 @@ agentthree-rag demo
 agentthree-rag eval
 pytest -q
 ```
+
+### Reproducible tests
+
+```bash
+python3 -m venv .venv && source .venv/bin/activate
+pip install -e ".[dev]"
+pytest -q
+agentthree-rag eval
+```
+
+Expected: pytest green; offline eval reports **100%** on faithfulness / citation / ACL fixtures (Alice answer, Bob ACL refuse, Eve public answer, fabrication refuse).
 
 ## Repository layout
 
