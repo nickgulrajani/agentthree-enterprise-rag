@@ -4,6 +4,8 @@
 
 An AI agent answers a policy question using **only authorized documents**, returns **citations**, and **refuses** when evidence is insufficient.
 
+Companion browser lab: [RAG Engineering · Module 04](https://agentthree.ai/ai-engineering-lab/rag-engineering)
+
 > **Non-billable portfolio demo.** Runs entirely locally — no LLM API keys, no cloud vector database, no model downloads. Production mappings are documented in [docs/architecture.md](docs/architecture.md).
 
 ---
