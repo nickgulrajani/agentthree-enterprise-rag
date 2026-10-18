@@ -33,7 +33,7 @@ Architecture diagram: [docs/architecture.md](docs/architecture.md)
 
 ---
 
-## What you can show in an interview
+## Key Points
 
 ```text
 Alice (HR, confidential)  →  ANSWER + cite POL-HR-001 ($75 stipend)
